@@ -1,0 +1,3598 @@
+Grammar:
+
+Rule 0     S' -> program
+Rule 1     program -> decl_list
+Rule 2     expr -> NEW type_spec SLBRAK expr SRBRAK
+Rule 3     expr -> FLOAT_LIT
+Rule 4     expr -> INT_LIT
+Rule 5     expr -> BOOL_LIT
+Rule 6     expr -> IDENT POINT SIZE
+Rule 7     expr -> IDENT LPAREN args RPAREN
+Rule 8     expr -> IDENT SLBRAK expr SRBRAK
+Rule 9     expr -> IDENT
+Rule 10    expr -> LPAREN expr RPAREN
+Rule 11    expr -> expr MOD expr  [precedence=left, level=7]
+Rule 12    expr -> expr DIVIDE expr  [precedence=left, level=7]
+Rule 13    expr -> expr TIMES expr  [precedence=left, level=7]
+Rule 14    expr -> expr MINUS expr  [precedence=left, level=6]
+Rule 15    expr -> expr PLUS expr  [precedence=left, level=6]
+Rule 16    expr -> expr GT expr  [precedence=left, level=5]
+Rule 17    expr -> expr GE expr  [precedence=left, level=5]
+Rule 18    expr -> expr LT expr  [precedence=left, level=5]
+Rule 19    expr -> expr LE expr  [precedence=left, level=5]
+Rule 20    expr -> expr NE expr  [precedence=left, level=4]
+Rule 21    expr -> expr EQ expr  [precedence=left, level=4]
+Rule 22    expr -> expr AND expr  [precedence=left, level=3]
+Rule 23    expr -> expr OR expr  [precedence=left, level=2]
+Rule 24    expr -> IDENT SLBRAK expr SRBRAK ASSIGN expr  [precedence=right, level=1]
+Rule 25    expr -> IDENT ASSIGN expr  [precedence=right, level=1]
+Rule 26    expr -> PLUS expr  [precedence=right, level=8]
+Rule 27    expr -> MINUS expr  [precedence=right, level=8]
+Rule 28    expr -> NEG expr  [precedence=right, level=8]
+Rule 29    decl_list -> decl
+Rule 30    decl_list -> decl_list decl
+Rule 31    decl -> fun_decl
+Rule 32    decl -> var_decl
+Rule 33    var_decl -> type_spec IDENT SLBRAK SRBRAK
+Rule 34    var_decl -> type_spec IDENT SEMI
+Rule 35    type_spec -> FLOAT
+Rule 36    type_spec -> INT
+Rule 37    type_spec -> BOOL
+Rule 38    type_spec -> VOID
+Rule 39    fun_decl -> type_spec IDENT LPAREN params RPAREN compound_stmt
+Rule 40    params -> VOID
+Rule 41    params -> param_list
+Rule 42    param_list -> param
+Rule 43    param_list -> param_list COMMA param
+Rule 44    param -> type_spec IDENT SLBRAK SRBRAK
+Rule 45    param -> type_spec IDENT
+Rule 46    compound_stmt -> LBRAK local_decls stmt_list RBRAK
+Rule 47    local_decls -> empty
+Rule 48    local_decls -> local_decls local_decl
+Rule 49    local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI
+Rule 50    local_decl -> type_spec IDENT SEMI
+Rule 51    stmt_list -> empty
+Rule 52    stmt_list -> stmt_list stmt
+Rule 53    stmt -> break_stmt
+Rule 54    stmt -> return_stmt
+Rule 55    stmt -> while_stmt
+Rule 56    stmt -> if_stmt
+Rule 57    stmt -> compound_stmt
+Rule 58    stmt -> expr_stmt
+Rule 59    expr_stmt -> SEMI
+Rule 60    expr_stmt -> expr SEMI
+Rule 61    while_stmt -> WHILE LPAREN expr RPAREN stmt
+Rule 62    if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt
+Rule 63    if_stmt -> IF LPAREN expr RPAREN stmt
+Rule 64    return_stmt -> RETURN expr SEMI
+Rule 65    return_stmt -> RETURN SEMI
+Rule 66    break_stmt -> BREAK SEMI
+Rule 67    arg_list -> expr
+Rule 68    arg_list -> arg_list COMMA expr
+Rule 69    args -> empty
+Rule 70    args -> arg_list
+Rule 71    empty -> <empty>
+
+Terminals, with rules where they appear:
+
+AND                  : 22
+ASSIGN               : 24 25
+BOOL                 : 37
+BOOL_LIT             : 5
+BREAK                : 66
+COMMA                : 43 68
+DIVIDE               : 12
+ELSE                 : 62
+EQ                   : 21
+FLOAT                : 35
+FLOAT_LIT            : 3
+GE                   : 17
+GT                   : 16
+IDENT                : 6 7 8 9 24 25 33 34 39 44 45 49 50
+IF                   : 62 63
+INT                  : 36
+INT_LIT              : 4
+LBRAK                : 46
+LE                   : 19
+LPAREN               : 7 10 39 61 62 63
+LT                   : 18
+MINUS                : 14 27
+MOD                  : 11
+NE                   : 20
+NEG                  : 28
+NEW                  : 2
+OR                   : 23
+PLUS                 : 15 26
+POINT                : 6
+RBRAK                : 46
+RETURN               : 64 65
+RPAREN               : 7 10 39 61 62 63
+SEMI                 : 34 49 50 59 60 64 65 66
+SIZE                 : 6
+SLBRAK               : 2 8 24 33 44 49
+SRBRAK               : 2 8 24 33 44 49
+TIMES                : 13
+VOID                 : 38 40
+WHILE                : 61
+error                : 
+
+Nonterminals, with rules where they appear:
+
+arg_list             : 68 70
+args                 : 7
+break_stmt           : 53
+compound_stmt        : 39 57
+decl                 : 29 30
+decl_list            : 1 30
+empty                : 47 51 69
+expr                 : 2 8 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 26 27 28 60 61 62 63 64 67 68
+expr_stmt            : 58
+fun_decl             : 31
+if_stmt              : 56
+local_decl           : 48
+local_decls          : 46 48
+param                : 42 43
+param_list           : 41 43
+params               : 39
+program              : 0
+return_stmt          : 54
+stmt                 : 52 61 62 62 63
+stmt_list            : 46 52
+type_spec            : 2 33 34 39 44 45 49 50
+var_decl             : 32
+while_stmt           : 55
+
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . decl_list
+    (29) decl_list -> . decl
+    (30) decl_list -> . decl_list decl
+    (31) decl -> . fun_decl
+    (32) decl -> . var_decl
+    (39) fun_decl -> . type_spec IDENT LPAREN params RPAREN compound_stmt
+    (33) var_decl -> . type_spec IDENT SLBRAK SRBRAK
+    (34) var_decl -> . type_spec IDENT SEMI
+    (35) type_spec -> . FLOAT
+    (36) type_spec -> . INT
+    (37) type_spec -> . BOOL
+    (38) type_spec -> . VOID
+    FLOAT           shift and go to state 7
+    INT             shift and go to state 8
+    BOOL            shift and go to state 9
+    VOID            shift and go to state 10
+
+    program                        shift and go to state 1
+    decl_list                      shift and go to state 2
+    decl                           shift and go to state 3
+    fun_decl                       shift and go to state 4
+    var_decl                       shift and go to state 5
+    type_spec                      shift and go to state 6
+
+state 1
+
+    (0) S' -> program .
+
+
+state 2
+
+    (1) program -> decl_list .
+    (30) decl_list -> decl_list . decl
+    (31) decl -> . fun_decl
+    (32) decl -> . var_decl
+    (39) fun_decl -> . type_spec IDENT LPAREN params RPAREN compound_stmt
+    (33) var_decl -> . type_spec IDENT SLBRAK SRBRAK
+    (34) var_decl -> . type_spec IDENT SEMI
+    (35) type_spec -> . FLOAT
+    (36) type_spec -> . INT
+    (37) type_spec -> . BOOL
+    (38) type_spec -> . VOID
+    $end            reduce using rule 1 (program -> decl_list .)
+    FLOAT           shift and go to state 7
+    INT             shift and go to state 8
+    BOOL            shift and go to state 9
+    VOID            shift and go to state 10
+
+    decl                           shift and go to state 11
+    fun_decl                       shift and go to state 4
+    var_decl                       shift and go to state 5
+    type_spec                      shift and go to state 6
+
+state 3
+
+    (29) decl_list -> decl .
+    FLOAT           reduce using rule 29 (decl_list -> decl .)
+    INT             reduce using rule 29 (decl_list -> decl .)
+    BOOL            reduce using rule 29 (decl_list -> decl .)
+    VOID            reduce using rule 29 (decl_list -> decl .)
+    $end            reduce using rule 29 (decl_list -> decl .)
+
+
+state 4
+
+    (31) decl -> fun_decl .
+    FLOAT           reduce using rule 31 (decl -> fun_decl .)
+    INT             reduce using rule 31 (decl -> fun_decl .)
+    BOOL            reduce using rule 31 (decl -> fun_decl .)
+    VOID            reduce using rule 31 (decl -> fun_decl .)
+    $end            reduce using rule 31 (decl -> fun_decl .)
+
+
+state 5
+
+    (32) decl -> var_decl .
+    FLOAT           reduce using rule 32 (decl -> var_decl .)
+    INT             reduce using rule 32 (decl -> var_decl .)
+    BOOL            reduce using rule 32 (decl -> var_decl .)
+    VOID            reduce using rule 32 (decl -> var_decl .)
+    $end            reduce using rule 32 (decl -> var_decl .)
+
+
+state 6
+
+    (39) fun_decl -> type_spec . IDENT LPAREN params RPAREN compound_stmt
+    (33) var_decl -> type_spec . IDENT SLBRAK SRBRAK
+    (34) var_decl -> type_spec . IDENT SEMI
+    IDENT           shift and go to state 12
+
+
+state 7
+
+    (35) type_spec -> FLOAT .
+    IDENT           reduce using rule 35 (type_spec -> FLOAT .)
+    SLBRAK          reduce using rule 35 (type_spec -> FLOAT .)
+
+
+state 8
+
+    (36) type_spec -> INT .
+    IDENT           reduce using rule 36 (type_spec -> INT .)
+    SLBRAK          reduce using rule 36 (type_spec -> INT .)
+
+
+state 9
+
+    (37) type_spec -> BOOL .
+    IDENT           reduce using rule 37 (type_spec -> BOOL .)
+    SLBRAK          reduce using rule 37 (type_spec -> BOOL .)
+
+
+state 10
+
+    (38) type_spec -> VOID .
+    IDENT           reduce using rule 38 (type_spec -> VOID .)
+    SLBRAK          reduce using rule 38 (type_spec -> VOID .)
+
+
+state 11
+
+    (30) decl_list -> decl_list decl .
+    FLOAT           reduce using rule 30 (decl_list -> decl_list decl .)
+    INT             reduce using rule 30 (decl_list -> decl_list decl .)
+    BOOL            reduce using rule 30 (decl_list -> decl_list decl .)
+    VOID            reduce using rule 30 (decl_list -> decl_list decl .)
+    $end            reduce using rule 30 (decl_list -> decl_list decl .)
+
+
+state 12
+
+    (39) fun_decl -> type_spec IDENT . LPAREN params RPAREN compound_stmt
+    (33) var_decl -> type_spec IDENT . SLBRAK SRBRAK
+    (34) var_decl -> type_spec IDENT . SEMI
+    LPAREN          shift and go to state 13
+    SLBRAK          shift and go to state 14
+    SEMI            shift and go to state 15
+
+
+state 13
+
+    (39) fun_decl -> type_spec IDENT LPAREN . params RPAREN compound_stmt
+    (40) params -> . VOID
+    (41) params -> . param_list
+    (42) param_list -> . param
+    (43) param_list -> . param_list COMMA param
+    (44) param -> . type_spec IDENT SLBRAK SRBRAK
+    (45) param -> . type_spec IDENT
+    (35) type_spec -> . FLOAT
+    (36) type_spec -> . INT
+    (37) type_spec -> . BOOL
+    (38) type_spec -> . VOID
+    VOID            shift and go to state 18
+    FLOAT           shift and go to state 7
+    INT             shift and go to state 8
+    BOOL            shift and go to state 9
+
+    type_spec                      shift and go to state 16
+    params                         shift and go to state 17
+    param_list                     shift and go to state 19
+    param                          shift and go to state 20
+
+state 14
+
+    (33) var_decl -> type_spec IDENT SLBRAK . SRBRAK
+    SRBRAK          shift and go to state 21
+
+
+state 15
+
+    (34) var_decl -> type_spec IDENT SEMI .
+    FLOAT           reduce using rule 34 (var_decl -> type_spec IDENT SEMI .)
+    INT             reduce using rule 34 (var_decl -> type_spec IDENT SEMI .)
+    BOOL            reduce using rule 34 (var_decl -> type_spec IDENT SEMI .)
+    VOID            reduce using rule 34 (var_decl -> type_spec IDENT SEMI .)
+    $end            reduce using rule 34 (var_decl -> type_spec IDENT SEMI .)
+
+
+state 16
+
+    (44) param -> type_spec . IDENT SLBRAK SRBRAK
+    (45) param -> type_spec . IDENT
+    IDENT           shift and go to state 22
+
+
+state 17
+
+    (39) fun_decl -> type_spec IDENT LPAREN params . RPAREN compound_stmt
+    RPAREN          shift and go to state 23
+
+
+state 18
+
+    (40) params -> VOID .
+    (38) type_spec -> VOID .
+    RPAREN          reduce using rule 40 (params -> VOID .)
+    IDENT           reduce using rule 38 (type_spec -> VOID .)
+
+
+state 19
+
+    (41) params -> param_list .
+    (43) param_list -> param_list . COMMA param
+    RPAREN          reduce using rule 41 (params -> param_list .)
+    COMMA           shift and go to state 24
+
+
+state 20
+
+    (42) param_list -> param .
+    COMMA           reduce using rule 42 (param_list -> param .)
+    RPAREN          reduce using rule 42 (param_list -> param .)
+
+
+state 21
+
+    (33) var_decl -> type_spec IDENT SLBRAK SRBRAK .
+    FLOAT           reduce using rule 33 (var_decl -> type_spec IDENT SLBRAK SRBRAK .)
+    INT             reduce using rule 33 (var_decl -> type_spec IDENT SLBRAK SRBRAK .)
+    BOOL            reduce using rule 33 (var_decl -> type_spec IDENT SLBRAK SRBRAK .)
+    VOID            reduce using rule 33 (var_decl -> type_spec IDENT SLBRAK SRBRAK .)
+    $end            reduce using rule 33 (var_decl -> type_spec IDENT SLBRAK SRBRAK .)
+
+
+state 22
+
+    (44) param -> type_spec IDENT . SLBRAK SRBRAK
+    (45) param -> type_spec IDENT .
+    SLBRAK          shift and go to state 25
+    COMMA           reduce using rule 45 (param -> type_spec IDENT .)
+    RPAREN          reduce using rule 45 (param -> type_spec IDENT .)
+
+
+state 23
+
+    (39) fun_decl -> type_spec IDENT LPAREN params RPAREN . compound_stmt
+    (46) compound_stmt -> . LBRAK local_decls stmt_list RBRAK
+    LBRAK           shift and go to state 27
+
+    compound_stmt                  shift and go to state 26
+
+state 24
+
+    (43) param_list -> param_list COMMA . param
+    (44) param -> . type_spec IDENT SLBRAK SRBRAK
+    (45) param -> . type_spec IDENT
+    (35) type_spec -> . FLOAT
+    (36) type_spec -> . INT
+    (37) type_spec -> . BOOL
+    (38) type_spec -> . VOID
+    FLOAT           shift and go to state 7
+    INT             shift and go to state 8
+    BOOL            shift and go to state 9
+    VOID            shift and go to state 10
+
+    param                          shift and go to state 28
+    type_spec                      shift and go to state 16
+
+state 25
+
+    (44) param -> type_spec IDENT SLBRAK . SRBRAK
+    SRBRAK          shift and go to state 29
+
+
+state 26
+
+    (39) fun_decl -> type_spec IDENT LPAREN params RPAREN compound_stmt .
+    FLOAT           reduce using rule 39 (fun_decl -> type_spec IDENT LPAREN params RPAREN compound_stmt .)
+    INT             reduce using rule 39 (fun_decl -> type_spec IDENT LPAREN params RPAREN compound_stmt .)
+    BOOL            reduce using rule 39 (fun_decl -> type_spec IDENT LPAREN params RPAREN compound_stmt .)
+    VOID            reduce using rule 39 (fun_decl -> type_spec IDENT LPAREN params RPAREN compound_stmt .)
+    $end            reduce using rule 39 (fun_decl -> type_spec IDENT LPAREN params RPAREN compound_stmt .)
+
+
+state 27
+
+    (46) compound_stmt -> LBRAK . local_decls stmt_list RBRAK
+    (47) local_decls -> . empty
+    (48) local_decls -> . local_decls local_decl
+    (71) empty -> .
+    FLOAT           reduce using rule 71 (empty -> .)
+    INT             reduce using rule 71 (empty -> .)
+    BOOL            reduce using rule 71 (empty -> .)
+    VOID            reduce using rule 71 (empty -> .)
+    RBRAK           reduce using rule 71 (empty -> .)
+    BREAK           reduce using rule 71 (empty -> .)
+    RETURN          reduce using rule 71 (empty -> .)
+    WHILE           reduce using rule 71 (empty -> .)
+    IF              reduce using rule 71 (empty -> .)
+    LBRAK           reduce using rule 71 (empty -> .)
+    SEMI            reduce using rule 71 (empty -> .)
+    NEW             reduce using rule 71 (empty -> .)
+    FLOAT_LIT       reduce using rule 71 (empty -> .)
+    INT_LIT         reduce using rule 71 (empty -> .)
+    BOOL_LIT        reduce using rule 71 (empty -> .)
+    IDENT           reduce using rule 71 (empty -> .)
+    LPAREN          reduce using rule 71 (empty -> .)
+    PLUS            reduce using rule 71 (empty -> .)
+    MINUS           reduce using rule 71 (empty -> .)
+    NEG             reduce using rule 71 (empty -> .)
+
+    local_decls                    shift and go to state 30
+    empty                          shift and go to state 31
+
+state 28
+
+    (43) param_list -> param_list COMMA param .
+    COMMA           reduce using rule 43 (param_list -> param_list COMMA param .)
+    RPAREN          reduce using rule 43 (param_list -> param_list COMMA param .)
+
+
+state 29
+
+    (44) param -> type_spec IDENT SLBRAK SRBRAK .
+    COMMA           reduce using rule 44 (param -> type_spec IDENT SLBRAK SRBRAK .)
+    RPAREN          reduce using rule 44 (param -> type_spec IDENT SLBRAK SRBRAK .)
+
+
+state 30
+
+    (46) compound_stmt -> LBRAK local_decls . stmt_list RBRAK
+    (48) local_decls -> local_decls . local_decl
+    (51) stmt_list -> . empty
+    (52) stmt_list -> . stmt_list stmt
+    (49) local_decl -> . type_spec IDENT SLBRAK SRBRAK SEMI
+    (50) local_decl -> . type_spec IDENT SEMI
+    (71) empty -> .
+    (35) type_spec -> . FLOAT
+    (36) type_spec -> . INT
+    (37) type_spec -> . BOOL
+    (38) type_spec -> . VOID
+    RBRAK           reduce using rule 71 (empty -> .)
+    BREAK           reduce using rule 71 (empty -> .)
+    RETURN          reduce using rule 71 (empty -> .)
+    WHILE           reduce using rule 71 (empty -> .)
+    IF              reduce using rule 71 (empty -> .)
+    LBRAK           reduce using rule 71 (empty -> .)
+    SEMI            reduce using rule 71 (empty -> .)
+    NEW             reduce using rule 71 (empty -> .)
+    FLOAT_LIT       reduce using rule 71 (empty -> .)
+    INT_LIT         reduce using rule 71 (empty -> .)
+    BOOL_LIT        reduce using rule 71 (empty -> .)
+    IDENT           reduce using rule 71 (empty -> .)
+    LPAREN          reduce using rule 71 (empty -> .)
+    PLUS            reduce using rule 71 (empty -> .)
+    MINUS           reduce using rule 71 (empty -> .)
+    NEG             reduce using rule 71 (empty -> .)
+    FLOAT           shift and go to state 7
+    INT             shift and go to state 8
+    BOOL            shift and go to state 9
+    VOID            shift and go to state 10
+
+    stmt_list                      shift and go to state 32
+    local_decl                     shift and go to state 33
+    empty                          shift and go to state 34
+    type_spec                      shift and go to state 35
+
+state 31
+
+    (47) local_decls -> empty .
+    FLOAT           reduce using rule 47 (local_decls -> empty .)
+    INT             reduce using rule 47 (local_decls -> empty .)
+    BOOL            reduce using rule 47 (local_decls -> empty .)
+    VOID            reduce using rule 47 (local_decls -> empty .)
+    RBRAK           reduce using rule 47 (local_decls -> empty .)
+    BREAK           reduce using rule 47 (local_decls -> empty .)
+    RETURN          reduce using rule 47 (local_decls -> empty .)
+    WHILE           reduce using rule 47 (local_decls -> empty .)
+    IF              reduce using rule 47 (local_decls -> empty .)
+    LBRAK           reduce using rule 47 (local_decls -> empty .)
+    SEMI            reduce using rule 47 (local_decls -> empty .)
+    NEW             reduce using rule 47 (local_decls -> empty .)
+    FLOAT_LIT       reduce using rule 47 (local_decls -> empty .)
+    INT_LIT         reduce using rule 47 (local_decls -> empty .)
+    BOOL_LIT        reduce using rule 47 (local_decls -> empty .)
+    IDENT           reduce using rule 47 (local_decls -> empty .)
+    LPAREN          reduce using rule 47 (local_decls -> empty .)
+    PLUS            reduce using rule 47 (local_decls -> empty .)
+    MINUS           reduce using rule 47 (local_decls -> empty .)
+    NEG             reduce using rule 47 (local_decls -> empty .)
+
+
+state 32
+
+    (46) compound_stmt -> LBRAK local_decls stmt_list . RBRAK
+    (52) stmt_list -> stmt_list . stmt
+    (53) stmt -> . break_stmt
+    (54) stmt -> . return_stmt
+    (55) stmt -> . while_stmt
+    (56) stmt -> . if_stmt
+    (57) stmt -> . compound_stmt
+    (58) stmt -> . expr_stmt
+    (66) break_stmt -> . BREAK SEMI
+    (64) return_stmt -> . RETURN expr SEMI
+    (65) return_stmt -> . RETURN SEMI
+    (61) while_stmt -> . WHILE LPAREN expr RPAREN stmt
+    (62) if_stmt -> . IF LPAREN expr RPAREN stmt ELSE stmt
+    (63) if_stmt -> . IF LPAREN expr RPAREN stmt
+    (46) compound_stmt -> . LBRAK local_decls stmt_list RBRAK
+    (59) expr_stmt -> . SEMI
+    (60) expr_stmt -> . expr SEMI
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    RBRAK           shift and go to state 36
+    BREAK           shift and go to state 44
+    RETURN          shift and go to state 46
+    WHILE           shift and go to state 48
+    IF              shift and go to state 50
+    LBRAK           shift and go to state 27
+    SEMI            shift and go to state 45
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    stmt                           shift and go to state 37
+    break_stmt                     shift and go to state 38
+    return_stmt                    shift and go to state 39
+    while_stmt                     shift and go to state 40
+    if_stmt                        shift and go to state 41
+    compound_stmt                  shift and go to state 42
+    expr_stmt                      shift and go to state 43
+    expr                           shift and go to state 47
+
+state 33
+
+    (48) local_decls -> local_decls local_decl .
+    FLOAT           reduce using rule 48 (local_decls -> local_decls local_decl .)
+    INT             reduce using rule 48 (local_decls -> local_decls local_decl .)
+    BOOL            reduce using rule 48 (local_decls -> local_decls local_decl .)
+    VOID            reduce using rule 48 (local_decls -> local_decls local_decl .)
+    RBRAK           reduce using rule 48 (local_decls -> local_decls local_decl .)
+    BREAK           reduce using rule 48 (local_decls -> local_decls local_decl .)
+    RETURN          reduce using rule 48 (local_decls -> local_decls local_decl .)
+    WHILE           reduce using rule 48 (local_decls -> local_decls local_decl .)
+    IF              reduce using rule 48 (local_decls -> local_decls local_decl .)
+    LBRAK           reduce using rule 48 (local_decls -> local_decls local_decl .)
+    SEMI            reduce using rule 48 (local_decls -> local_decls local_decl .)
+    NEW             reduce using rule 48 (local_decls -> local_decls local_decl .)
+    FLOAT_LIT       reduce using rule 48 (local_decls -> local_decls local_decl .)
+    INT_LIT         reduce using rule 48 (local_decls -> local_decls local_decl .)
+    BOOL_LIT        reduce using rule 48 (local_decls -> local_decls local_decl .)
+    IDENT           reduce using rule 48 (local_decls -> local_decls local_decl .)
+    LPAREN          reduce using rule 48 (local_decls -> local_decls local_decl .)
+    PLUS            reduce using rule 48 (local_decls -> local_decls local_decl .)
+    MINUS           reduce using rule 48 (local_decls -> local_decls local_decl .)
+    NEG             reduce using rule 48 (local_decls -> local_decls local_decl .)
+
+
+state 34
+
+    (51) stmt_list -> empty .
+    RBRAK           reduce using rule 51 (stmt_list -> empty .)
+    BREAK           reduce using rule 51 (stmt_list -> empty .)
+    RETURN          reduce using rule 51 (stmt_list -> empty .)
+    WHILE           reduce using rule 51 (stmt_list -> empty .)
+    IF              reduce using rule 51 (stmt_list -> empty .)
+    LBRAK           reduce using rule 51 (stmt_list -> empty .)
+    SEMI            reduce using rule 51 (stmt_list -> empty .)
+    NEW             reduce using rule 51 (stmt_list -> empty .)
+    FLOAT_LIT       reduce using rule 51 (stmt_list -> empty .)
+    INT_LIT         reduce using rule 51 (stmt_list -> empty .)
+    BOOL_LIT        reduce using rule 51 (stmt_list -> empty .)
+    IDENT           reduce using rule 51 (stmt_list -> empty .)
+    LPAREN          reduce using rule 51 (stmt_list -> empty .)
+    PLUS            reduce using rule 51 (stmt_list -> empty .)
+    MINUS           reduce using rule 51 (stmt_list -> empty .)
+    NEG             reduce using rule 51 (stmt_list -> empty .)
+
+
+state 35
+
+    (49) local_decl -> type_spec . IDENT SLBRAK SRBRAK SEMI
+    (50) local_decl -> type_spec . IDENT SEMI
+    IDENT           shift and go to state 59
+
+
+state 36
+
+    (46) compound_stmt -> LBRAK local_decls stmt_list RBRAK .
+    FLOAT           reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    INT             reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    BOOL            reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    VOID            reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    $end            reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    RBRAK           reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    BREAK           reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    RETURN          reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    WHILE           reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    IF              reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    LBRAK           reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    SEMI            reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    NEW             reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    FLOAT_LIT       reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    INT_LIT         reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    BOOL_LIT        reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    IDENT           reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    LPAREN          reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    PLUS            reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    MINUS           reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    NEG             reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+    ELSE            reduce using rule 46 (compound_stmt -> LBRAK local_decls stmt_list RBRAK .)
+
+
+state 37
+
+    (52) stmt_list -> stmt_list stmt .
+    RBRAK           reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    BREAK           reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    RETURN          reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    WHILE           reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    IF              reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    LBRAK           reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    SEMI            reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    NEW             reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    FLOAT_LIT       reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    INT_LIT         reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    BOOL_LIT        reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    IDENT           reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    LPAREN          reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    PLUS            reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    MINUS           reduce using rule 52 (stmt_list -> stmt_list stmt .)
+    NEG             reduce using rule 52 (stmt_list -> stmt_list stmt .)
+
+
+state 38
+
+    (53) stmt -> break_stmt .
+    RBRAK           reduce using rule 53 (stmt -> break_stmt .)
+    BREAK           reduce using rule 53 (stmt -> break_stmt .)
+    RETURN          reduce using rule 53 (stmt -> break_stmt .)
+    WHILE           reduce using rule 53 (stmt -> break_stmt .)
+    IF              reduce using rule 53 (stmt -> break_stmt .)
+    LBRAK           reduce using rule 53 (stmt -> break_stmt .)
+    SEMI            reduce using rule 53 (stmt -> break_stmt .)
+    NEW             reduce using rule 53 (stmt -> break_stmt .)
+    FLOAT_LIT       reduce using rule 53 (stmt -> break_stmt .)
+    INT_LIT         reduce using rule 53 (stmt -> break_stmt .)
+    BOOL_LIT        reduce using rule 53 (stmt -> break_stmt .)
+    IDENT           reduce using rule 53 (stmt -> break_stmt .)
+    LPAREN          reduce using rule 53 (stmt -> break_stmt .)
+    PLUS            reduce using rule 53 (stmt -> break_stmt .)
+    MINUS           reduce using rule 53 (stmt -> break_stmt .)
+    NEG             reduce using rule 53 (stmt -> break_stmt .)
+    ELSE            reduce using rule 53 (stmt -> break_stmt .)
+
+
+state 39
+
+    (54) stmt -> return_stmt .
+    RBRAK           reduce using rule 54 (stmt -> return_stmt .)
+    BREAK           reduce using rule 54 (stmt -> return_stmt .)
+    RETURN          reduce using rule 54 (stmt -> return_stmt .)
+    WHILE           reduce using rule 54 (stmt -> return_stmt .)
+    IF              reduce using rule 54 (stmt -> return_stmt .)
+    LBRAK           reduce using rule 54 (stmt -> return_stmt .)
+    SEMI            reduce using rule 54 (stmt -> return_stmt .)
+    NEW             reduce using rule 54 (stmt -> return_stmt .)
+    FLOAT_LIT       reduce using rule 54 (stmt -> return_stmt .)
+    INT_LIT         reduce using rule 54 (stmt -> return_stmt .)
+    BOOL_LIT        reduce using rule 54 (stmt -> return_stmt .)
+    IDENT           reduce using rule 54 (stmt -> return_stmt .)
+    LPAREN          reduce using rule 54 (stmt -> return_stmt .)
+    PLUS            reduce using rule 54 (stmt -> return_stmt .)
+    MINUS           reduce using rule 54 (stmt -> return_stmt .)
+    NEG             reduce using rule 54 (stmt -> return_stmt .)
+    ELSE            reduce using rule 54 (stmt -> return_stmt .)
+
+
+state 40
+
+    (55) stmt -> while_stmt .
+    RBRAK           reduce using rule 55 (stmt -> while_stmt .)
+    BREAK           reduce using rule 55 (stmt -> while_stmt .)
+    RETURN          reduce using rule 55 (stmt -> while_stmt .)
+    WHILE           reduce using rule 55 (stmt -> while_stmt .)
+    IF              reduce using rule 55 (stmt -> while_stmt .)
+    LBRAK           reduce using rule 55 (stmt -> while_stmt .)
+    SEMI            reduce using rule 55 (stmt -> while_stmt .)
+    NEW             reduce using rule 55 (stmt -> while_stmt .)
+    FLOAT_LIT       reduce using rule 55 (stmt -> while_stmt .)
+    INT_LIT         reduce using rule 55 (stmt -> while_stmt .)
+    BOOL_LIT        reduce using rule 55 (stmt -> while_stmt .)
+    IDENT           reduce using rule 55 (stmt -> while_stmt .)
+    LPAREN          reduce using rule 55 (stmt -> while_stmt .)
+    PLUS            reduce using rule 55 (stmt -> while_stmt .)
+    MINUS           reduce using rule 55 (stmt -> while_stmt .)
+    NEG             reduce using rule 55 (stmt -> while_stmt .)
+    ELSE            reduce using rule 55 (stmt -> while_stmt .)
+
+
+state 41
+
+    (56) stmt -> if_stmt .
+    RBRAK           reduce using rule 56 (stmt -> if_stmt .)
+    BREAK           reduce using rule 56 (stmt -> if_stmt .)
+    RETURN          reduce using rule 56 (stmt -> if_stmt .)
+    WHILE           reduce using rule 56 (stmt -> if_stmt .)
+    IF              reduce using rule 56 (stmt -> if_stmt .)
+    LBRAK           reduce using rule 56 (stmt -> if_stmt .)
+    SEMI            reduce using rule 56 (stmt -> if_stmt .)
+    NEW             reduce using rule 56 (stmt -> if_stmt .)
+    FLOAT_LIT       reduce using rule 56 (stmt -> if_stmt .)
+    INT_LIT         reduce using rule 56 (stmt -> if_stmt .)
+    BOOL_LIT        reduce using rule 56 (stmt -> if_stmt .)
+    IDENT           reduce using rule 56 (stmt -> if_stmt .)
+    LPAREN          reduce using rule 56 (stmt -> if_stmt .)
+    PLUS            reduce using rule 56 (stmt -> if_stmt .)
+    MINUS           reduce using rule 56 (stmt -> if_stmt .)
+    NEG             reduce using rule 56 (stmt -> if_stmt .)
+    ELSE            reduce using rule 56 (stmt -> if_stmt .)
+
+
+state 42
+
+    (57) stmt -> compound_stmt .
+    RBRAK           reduce using rule 57 (stmt -> compound_stmt .)
+    BREAK           reduce using rule 57 (stmt -> compound_stmt .)
+    RETURN          reduce using rule 57 (stmt -> compound_stmt .)
+    WHILE           reduce using rule 57 (stmt -> compound_stmt .)
+    IF              reduce using rule 57 (stmt -> compound_stmt .)
+    LBRAK           reduce using rule 57 (stmt -> compound_stmt .)
+    SEMI            reduce using rule 57 (stmt -> compound_stmt .)
+    NEW             reduce using rule 57 (stmt -> compound_stmt .)
+    FLOAT_LIT       reduce using rule 57 (stmt -> compound_stmt .)
+    INT_LIT         reduce using rule 57 (stmt -> compound_stmt .)
+    BOOL_LIT        reduce using rule 57 (stmt -> compound_stmt .)
+    IDENT           reduce using rule 57 (stmt -> compound_stmt .)
+    LPAREN          reduce using rule 57 (stmt -> compound_stmt .)
+    PLUS            reduce using rule 57 (stmt -> compound_stmt .)
+    MINUS           reduce using rule 57 (stmt -> compound_stmt .)
+    NEG             reduce using rule 57 (stmt -> compound_stmt .)
+    ELSE            reduce using rule 57 (stmt -> compound_stmt .)
+
+
+state 43
+
+    (58) stmt -> expr_stmt .
+    RBRAK           reduce using rule 58 (stmt -> expr_stmt .)
+    BREAK           reduce using rule 58 (stmt -> expr_stmt .)
+    RETURN          reduce using rule 58 (stmt -> expr_stmt .)
+    WHILE           reduce using rule 58 (stmt -> expr_stmt .)
+    IF              reduce using rule 58 (stmt -> expr_stmt .)
+    LBRAK           reduce using rule 58 (stmt -> expr_stmt .)
+    SEMI            reduce using rule 58 (stmt -> expr_stmt .)
+    NEW             reduce using rule 58 (stmt -> expr_stmt .)
+    FLOAT_LIT       reduce using rule 58 (stmt -> expr_stmt .)
+    INT_LIT         reduce using rule 58 (stmt -> expr_stmt .)
+    BOOL_LIT        reduce using rule 58 (stmt -> expr_stmt .)
+    IDENT           reduce using rule 58 (stmt -> expr_stmt .)
+    LPAREN          reduce using rule 58 (stmt -> expr_stmt .)
+    PLUS            reduce using rule 58 (stmt -> expr_stmt .)
+    MINUS           reduce using rule 58 (stmt -> expr_stmt .)
+    NEG             reduce using rule 58 (stmt -> expr_stmt .)
+    ELSE            reduce using rule 58 (stmt -> expr_stmt .)
+
+
+state 44
+
+    (66) break_stmt -> BREAK . SEMI
+    SEMI            shift and go to state 60
+
+
+state 45
+
+    (59) expr_stmt -> SEMI .
+    RBRAK           reduce using rule 59 (expr_stmt -> SEMI .)
+    BREAK           reduce using rule 59 (expr_stmt -> SEMI .)
+    RETURN          reduce using rule 59 (expr_stmt -> SEMI .)
+    WHILE           reduce using rule 59 (expr_stmt -> SEMI .)
+    IF              reduce using rule 59 (expr_stmt -> SEMI .)
+    LBRAK           reduce using rule 59 (expr_stmt -> SEMI .)
+    SEMI            reduce using rule 59 (expr_stmt -> SEMI .)
+    NEW             reduce using rule 59 (expr_stmt -> SEMI .)
+    FLOAT_LIT       reduce using rule 59 (expr_stmt -> SEMI .)
+    INT_LIT         reduce using rule 59 (expr_stmt -> SEMI .)
+    BOOL_LIT        reduce using rule 59 (expr_stmt -> SEMI .)
+    IDENT           reduce using rule 59 (expr_stmt -> SEMI .)
+    LPAREN          reduce using rule 59 (expr_stmt -> SEMI .)
+    PLUS            reduce using rule 59 (expr_stmt -> SEMI .)
+    MINUS           reduce using rule 59 (expr_stmt -> SEMI .)
+    NEG             reduce using rule 59 (expr_stmt -> SEMI .)
+    ELSE            reduce using rule 59 (expr_stmt -> SEMI .)
+
+
+state 46
+
+    (64) return_stmt -> RETURN . expr SEMI
+    (65) return_stmt -> RETURN . SEMI
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    SEMI            shift and go to state 62
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 61
+
+state 47
+
+    (60) expr_stmt -> expr . SEMI
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            shift and go to state 63
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 48
+
+    (61) while_stmt -> WHILE . LPAREN expr RPAREN stmt
+    LPAREN          shift and go to state 77
+
+
+state 49
+
+    (10) expr -> LPAREN . expr RPAREN
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 78
+
+state 50
+
+    (62) if_stmt -> IF . LPAREN expr RPAREN stmt ELSE stmt
+    (63) if_stmt -> IF . LPAREN expr RPAREN stmt
+    LPAREN          shift and go to state 79
+
+
+state 51
+
+    (2) expr -> NEW . type_spec SLBRAK expr SRBRAK
+    (35) type_spec -> . FLOAT
+    (36) type_spec -> . INT
+    (37) type_spec -> . BOOL
+    (38) type_spec -> . VOID
+    FLOAT           shift and go to state 7
+    INT             shift and go to state 8
+    BOOL            shift and go to state 9
+    VOID            shift and go to state 10
+
+    type_spec                      shift and go to state 80
+
+state 52
+
+    (3) expr -> FLOAT_LIT .
+    SEMI            reduce using rule 3 (expr -> FLOAT_LIT .)
+    MOD             reduce using rule 3 (expr -> FLOAT_LIT .)
+    DIVIDE          reduce using rule 3 (expr -> FLOAT_LIT .)
+    TIMES           reduce using rule 3 (expr -> FLOAT_LIT .)
+    MINUS           reduce using rule 3 (expr -> FLOAT_LIT .)
+    PLUS            reduce using rule 3 (expr -> FLOAT_LIT .)
+    GT              reduce using rule 3 (expr -> FLOAT_LIT .)
+    GE              reduce using rule 3 (expr -> FLOAT_LIT .)
+    LT              reduce using rule 3 (expr -> FLOAT_LIT .)
+    LE              reduce using rule 3 (expr -> FLOAT_LIT .)
+    NE              reduce using rule 3 (expr -> FLOAT_LIT .)
+    EQ              reduce using rule 3 (expr -> FLOAT_LIT .)
+    AND             reduce using rule 3 (expr -> FLOAT_LIT .)
+    OR              reduce using rule 3 (expr -> FLOAT_LIT .)
+    RPAREN          reduce using rule 3 (expr -> FLOAT_LIT .)
+    COMMA           reduce using rule 3 (expr -> FLOAT_LIT .)
+    SRBRAK          reduce using rule 3 (expr -> FLOAT_LIT .)
+
+
+state 53
+
+    (4) expr -> INT_LIT .
+    SEMI            reduce using rule 4 (expr -> INT_LIT .)
+    MOD             reduce using rule 4 (expr -> INT_LIT .)
+    DIVIDE          reduce using rule 4 (expr -> INT_LIT .)
+    TIMES           reduce using rule 4 (expr -> INT_LIT .)
+    MINUS           reduce using rule 4 (expr -> INT_LIT .)
+    PLUS            reduce using rule 4 (expr -> INT_LIT .)
+    GT              reduce using rule 4 (expr -> INT_LIT .)
+    GE              reduce using rule 4 (expr -> INT_LIT .)
+    LT              reduce using rule 4 (expr -> INT_LIT .)
+    LE              reduce using rule 4 (expr -> INT_LIT .)
+    NE              reduce using rule 4 (expr -> INT_LIT .)
+    EQ              reduce using rule 4 (expr -> INT_LIT .)
+    AND             reduce using rule 4 (expr -> INT_LIT .)
+    OR              reduce using rule 4 (expr -> INT_LIT .)
+    RPAREN          reduce using rule 4 (expr -> INT_LIT .)
+    COMMA           reduce using rule 4 (expr -> INT_LIT .)
+    SRBRAK          reduce using rule 4 (expr -> INT_LIT .)
+
+
+state 54
+
+    (5) expr -> BOOL_LIT .
+    SEMI            reduce using rule 5 (expr -> BOOL_LIT .)
+    MOD             reduce using rule 5 (expr -> BOOL_LIT .)
+    DIVIDE          reduce using rule 5 (expr -> BOOL_LIT .)
+    TIMES           reduce using rule 5 (expr -> BOOL_LIT .)
+    MINUS           reduce using rule 5 (expr -> BOOL_LIT .)
+    PLUS            reduce using rule 5 (expr -> BOOL_LIT .)
+    GT              reduce using rule 5 (expr -> BOOL_LIT .)
+    GE              reduce using rule 5 (expr -> BOOL_LIT .)
+    LT              reduce using rule 5 (expr -> BOOL_LIT .)
+    LE              reduce using rule 5 (expr -> BOOL_LIT .)
+    NE              reduce using rule 5 (expr -> BOOL_LIT .)
+    EQ              reduce using rule 5 (expr -> BOOL_LIT .)
+    AND             reduce using rule 5 (expr -> BOOL_LIT .)
+    OR              reduce using rule 5 (expr -> BOOL_LIT .)
+    RPAREN          reduce using rule 5 (expr -> BOOL_LIT .)
+    COMMA           reduce using rule 5 (expr -> BOOL_LIT .)
+    SRBRAK          reduce using rule 5 (expr -> BOOL_LIT .)
+
+
+state 55
+
+    (6) expr -> IDENT . POINT SIZE
+    (7) expr -> IDENT . LPAREN args RPAREN
+    (8) expr -> IDENT . SLBRAK expr SRBRAK
+    (9) expr -> IDENT .
+    (24) expr -> IDENT . SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> IDENT . ASSIGN expr
+    POINT           shift and go to state 81
+    LPAREN          shift and go to state 82
+    SLBRAK          shift and go to state 83
+    SEMI            reduce using rule 9 (expr -> IDENT .)
+    MOD             reduce using rule 9 (expr -> IDENT .)
+    DIVIDE          reduce using rule 9 (expr -> IDENT .)
+    TIMES           reduce using rule 9 (expr -> IDENT .)
+    MINUS           reduce using rule 9 (expr -> IDENT .)
+    PLUS            reduce using rule 9 (expr -> IDENT .)
+    GT              reduce using rule 9 (expr -> IDENT .)
+    GE              reduce using rule 9 (expr -> IDENT .)
+    LT              reduce using rule 9 (expr -> IDENT .)
+    LE              reduce using rule 9 (expr -> IDENT .)
+    NE              reduce using rule 9 (expr -> IDENT .)
+    EQ              reduce using rule 9 (expr -> IDENT .)
+    AND             reduce using rule 9 (expr -> IDENT .)
+    OR              reduce using rule 9 (expr -> IDENT .)
+    RPAREN          reduce using rule 9 (expr -> IDENT .)
+    COMMA           reduce using rule 9 (expr -> IDENT .)
+    SRBRAK          reduce using rule 9 (expr -> IDENT .)
+    ASSIGN          shift and go to state 84
+
+
+state 56
+
+    (27) expr -> MINUS . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 85
+
+state 57
+
+    (26) expr -> PLUS . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 86
+
+state 58
+
+    (28) expr -> NEG . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 87
+
+state 59
+
+    (49) local_decl -> type_spec IDENT . SLBRAK SRBRAK SEMI
+    (50) local_decl -> type_spec IDENT . SEMI
+    SLBRAK          shift and go to state 88
+    SEMI            shift and go to state 89
+
+
+state 60
+
+    (66) break_stmt -> BREAK SEMI .
+    RBRAK           reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    BREAK           reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    RETURN          reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    WHILE           reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    IF              reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    LBRAK           reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    SEMI            reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    NEW             reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    FLOAT_LIT       reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    INT_LIT         reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    BOOL_LIT        reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    IDENT           reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    LPAREN          reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    PLUS            reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    MINUS           reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    NEG             reduce using rule 66 (break_stmt -> BREAK SEMI .)
+    ELSE            reduce using rule 66 (break_stmt -> BREAK SEMI .)
+
+
+state 61
+
+    (64) return_stmt -> RETURN expr . SEMI
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            shift and go to state 90
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 62
+
+    (65) return_stmt -> RETURN SEMI .
+    RBRAK           reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    BREAK           reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    RETURN          reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    WHILE           reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    IF              reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    LBRAK           reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    SEMI            reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    NEW             reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    FLOAT_LIT       reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    INT_LIT         reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    BOOL_LIT        reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    IDENT           reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    LPAREN          reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    PLUS            reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    MINUS           reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    NEG             reduce using rule 65 (return_stmt -> RETURN SEMI .)
+    ELSE            reduce using rule 65 (return_stmt -> RETURN SEMI .)
+
+
+state 63
+
+    (60) expr_stmt -> expr SEMI .
+    RBRAK           reduce using rule 60 (expr_stmt -> expr SEMI .)
+    BREAK           reduce using rule 60 (expr_stmt -> expr SEMI .)
+    RETURN          reduce using rule 60 (expr_stmt -> expr SEMI .)
+    WHILE           reduce using rule 60 (expr_stmt -> expr SEMI .)
+    IF              reduce using rule 60 (expr_stmt -> expr SEMI .)
+    LBRAK           reduce using rule 60 (expr_stmt -> expr SEMI .)
+    SEMI            reduce using rule 60 (expr_stmt -> expr SEMI .)
+    NEW             reduce using rule 60 (expr_stmt -> expr SEMI .)
+    FLOAT_LIT       reduce using rule 60 (expr_stmt -> expr SEMI .)
+    INT_LIT         reduce using rule 60 (expr_stmt -> expr SEMI .)
+    BOOL_LIT        reduce using rule 60 (expr_stmt -> expr SEMI .)
+    IDENT           reduce using rule 60 (expr_stmt -> expr SEMI .)
+    LPAREN          reduce using rule 60 (expr_stmt -> expr SEMI .)
+    PLUS            reduce using rule 60 (expr_stmt -> expr SEMI .)
+    MINUS           reduce using rule 60 (expr_stmt -> expr SEMI .)
+    NEG             reduce using rule 60 (expr_stmt -> expr SEMI .)
+    ELSE            reduce using rule 60 (expr_stmt -> expr SEMI .)
+
+
+state 64
+
+    (11) expr -> expr MOD . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 91
+
+state 65
+
+    (12) expr -> expr DIVIDE . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 92
+
+state 66
+
+    (13) expr -> expr TIMES . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 93
+
+state 67
+
+    (14) expr -> expr MINUS . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 94
+
+state 68
+
+    (15) expr -> expr PLUS . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 95
+
+state 69
+
+    (16) expr -> expr GT . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 96
+
+state 70
+
+    (17) expr -> expr GE . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 97
+
+state 71
+
+    (18) expr -> expr LT . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 98
+
+state 72
+
+    (19) expr -> expr LE . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 99
+
+state 73
+
+    (20) expr -> expr NE . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 100
+
+state 74
+
+    (21) expr -> expr EQ . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 101
+
+state 75
+
+    (22) expr -> expr AND . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 102
+
+state 76
+
+    (23) expr -> expr OR . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 103
+
+state 77
+
+    (61) while_stmt -> WHILE LPAREN . expr RPAREN stmt
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 104
+
+state 78
+
+    (10) expr -> LPAREN expr . RPAREN
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    RPAREN          shift and go to state 105
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 79
+
+    (62) if_stmt -> IF LPAREN . expr RPAREN stmt ELSE stmt
+    (63) if_stmt -> IF LPAREN . expr RPAREN stmt
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 106
+
+state 80
+
+    (2) expr -> NEW type_spec . SLBRAK expr SRBRAK
+    SLBRAK          shift and go to state 107
+
+
+state 81
+
+    (6) expr -> IDENT POINT . SIZE
+    SIZE            shift and go to state 108
+
+
+state 82
+
+    (7) expr -> IDENT LPAREN . args RPAREN
+    (69) args -> . empty
+    (70) args -> . arg_list
+    (71) empty -> .
+    (67) arg_list -> . expr
+    (68) arg_list -> . arg_list COMMA expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    RPAREN          reduce using rule 71 (empty -> .)
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    args                           shift and go to state 109
+    empty                          shift and go to state 110
+    arg_list                       shift and go to state 111
+    expr                           shift and go to state 112
+
+state 83
+
+    (8) expr -> IDENT SLBRAK . expr SRBRAK
+    (24) expr -> IDENT SLBRAK . expr SRBRAK ASSIGN expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 113
+
+state 84
+
+    (25) expr -> IDENT ASSIGN . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 114
+
+state 85
+
+    (27) expr -> MINUS expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 27 (expr -> MINUS expr .)
+    MOD             reduce using rule 27 (expr -> MINUS expr .)
+    DIVIDE          reduce using rule 27 (expr -> MINUS expr .)
+    TIMES           reduce using rule 27 (expr -> MINUS expr .)
+    MINUS           reduce using rule 27 (expr -> MINUS expr .)
+    PLUS            reduce using rule 27 (expr -> MINUS expr .)
+    GT              reduce using rule 27 (expr -> MINUS expr .)
+    GE              reduce using rule 27 (expr -> MINUS expr .)
+    LT              reduce using rule 27 (expr -> MINUS expr .)
+    LE              reduce using rule 27 (expr -> MINUS expr .)
+    NE              reduce using rule 27 (expr -> MINUS expr .)
+    EQ              reduce using rule 27 (expr -> MINUS expr .)
+    AND             reduce using rule 27 (expr -> MINUS expr .)
+    OR              reduce using rule 27 (expr -> MINUS expr .)
+    RPAREN          reduce using rule 27 (expr -> MINUS expr .)
+    COMMA           reduce using rule 27 (expr -> MINUS expr .)
+    SRBRAK          reduce using rule 27 (expr -> MINUS expr .)
+
+
+state 86
+
+    (26) expr -> PLUS expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 26 (expr -> PLUS expr .)
+    MOD             reduce using rule 26 (expr -> PLUS expr .)
+    DIVIDE          reduce using rule 26 (expr -> PLUS expr .)
+    TIMES           reduce using rule 26 (expr -> PLUS expr .)
+    MINUS           reduce using rule 26 (expr -> PLUS expr .)
+    PLUS            reduce using rule 26 (expr -> PLUS expr .)
+    GT              reduce using rule 26 (expr -> PLUS expr .)
+    GE              reduce using rule 26 (expr -> PLUS expr .)
+    LT              reduce using rule 26 (expr -> PLUS expr .)
+    LE              reduce using rule 26 (expr -> PLUS expr .)
+    NE              reduce using rule 26 (expr -> PLUS expr .)
+    EQ              reduce using rule 26 (expr -> PLUS expr .)
+    AND             reduce using rule 26 (expr -> PLUS expr .)
+    OR              reduce using rule 26 (expr -> PLUS expr .)
+    RPAREN          reduce using rule 26 (expr -> PLUS expr .)
+    COMMA           reduce using rule 26 (expr -> PLUS expr .)
+    SRBRAK          reduce using rule 26 (expr -> PLUS expr .)
+
+
+state 87
+
+    (28) expr -> NEG expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 28 (expr -> NEG expr .)
+    MOD             reduce using rule 28 (expr -> NEG expr .)
+    DIVIDE          reduce using rule 28 (expr -> NEG expr .)
+    TIMES           reduce using rule 28 (expr -> NEG expr .)
+    MINUS           reduce using rule 28 (expr -> NEG expr .)
+    PLUS            reduce using rule 28 (expr -> NEG expr .)
+    GT              reduce using rule 28 (expr -> NEG expr .)
+    GE              reduce using rule 28 (expr -> NEG expr .)
+    LT              reduce using rule 28 (expr -> NEG expr .)
+    LE              reduce using rule 28 (expr -> NEG expr .)
+    NE              reduce using rule 28 (expr -> NEG expr .)
+    EQ              reduce using rule 28 (expr -> NEG expr .)
+    AND             reduce using rule 28 (expr -> NEG expr .)
+    OR              reduce using rule 28 (expr -> NEG expr .)
+    RPAREN          reduce using rule 28 (expr -> NEG expr .)
+    COMMA           reduce using rule 28 (expr -> NEG expr .)
+    SRBRAK          reduce using rule 28 (expr -> NEG expr .)
+
+
+state 88
+
+    (49) local_decl -> type_spec IDENT SLBRAK . SRBRAK SEMI
+    SRBRAK          shift and go to state 115
+
+
+state 89
+
+    (50) local_decl -> type_spec IDENT SEMI .
+    FLOAT           reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    INT             reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    BOOL            reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    VOID            reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    RBRAK           reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    BREAK           reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    RETURN          reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    WHILE           reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    IF              reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    LBRAK           reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    SEMI            reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    NEW             reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    FLOAT_LIT       reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    INT_LIT         reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    BOOL_LIT        reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    IDENT           reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    LPAREN          reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    PLUS            reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    MINUS           reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+    NEG             reduce using rule 50 (local_decl -> type_spec IDENT SEMI .)
+
+
+state 90
+
+    (64) return_stmt -> RETURN expr SEMI .
+    RBRAK           reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    BREAK           reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    RETURN          reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    WHILE           reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    IF              reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    LBRAK           reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    SEMI            reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    NEW             reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    FLOAT_LIT       reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    INT_LIT         reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    BOOL_LIT        reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    IDENT           reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    LPAREN          reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    PLUS            reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    MINUS           reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    NEG             reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+    ELSE            reduce using rule 64 (return_stmt -> RETURN expr SEMI .)
+
+
+state 91
+
+    (11) expr -> expr MOD expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 11 (expr -> expr MOD expr .)
+    MOD             reduce using rule 11 (expr -> expr MOD expr .)
+    DIVIDE          reduce using rule 11 (expr -> expr MOD expr .)
+    TIMES           reduce using rule 11 (expr -> expr MOD expr .)
+    MINUS           reduce using rule 11 (expr -> expr MOD expr .)
+    PLUS            reduce using rule 11 (expr -> expr MOD expr .)
+    GT              reduce using rule 11 (expr -> expr MOD expr .)
+    GE              reduce using rule 11 (expr -> expr MOD expr .)
+    LT              reduce using rule 11 (expr -> expr MOD expr .)
+    LE              reduce using rule 11 (expr -> expr MOD expr .)
+    NE              reduce using rule 11 (expr -> expr MOD expr .)
+    EQ              reduce using rule 11 (expr -> expr MOD expr .)
+    AND             reduce using rule 11 (expr -> expr MOD expr .)
+    OR              reduce using rule 11 (expr -> expr MOD expr .)
+    RPAREN          reduce using rule 11 (expr -> expr MOD expr .)
+    COMMA           reduce using rule 11 (expr -> expr MOD expr .)
+    SRBRAK          reduce using rule 11 (expr -> expr MOD expr .)
+
+
+state 92
+
+    (12) expr -> expr DIVIDE expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 12 (expr -> expr DIVIDE expr .)
+    MOD             reduce using rule 12 (expr -> expr DIVIDE expr .)
+    DIVIDE          reduce using rule 12 (expr -> expr DIVIDE expr .)
+    TIMES           reduce using rule 12 (expr -> expr DIVIDE expr .)
+    MINUS           reduce using rule 12 (expr -> expr DIVIDE expr .)
+    PLUS            reduce using rule 12 (expr -> expr DIVIDE expr .)
+    GT              reduce using rule 12 (expr -> expr DIVIDE expr .)
+    GE              reduce using rule 12 (expr -> expr DIVIDE expr .)
+    LT              reduce using rule 12 (expr -> expr DIVIDE expr .)
+    LE              reduce using rule 12 (expr -> expr DIVIDE expr .)
+    NE              reduce using rule 12 (expr -> expr DIVIDE expr .)
+    EQ              reduce using rule 12 (expr -> expr DIVIDE expr .)
+    AND             reduce using rule 12 (expr -> expr DIVIDE expr .)
+    OR              reduce using rule 12 (expr -> expr DIVIDE expr .)
+    RPAREN          reduce using rule 12 (expr -> expr DIVIDE expr .)
+    COMMA           reduce using rule 12 (expr -> expr DIVIDE expr .)
+    SRBRAK          reduce using rule 12 (expr -> expr DIVIDE expr .)
+
+
+state 93
+
+    (13) expr -> expr TIMES expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 13 (expr -> expr TIMES expr .)
+    MOD             reduce using rule 13 (expr -> expr TIMES expr .)
+    DIVIDE          reduce using rule 13 (expr -> expr TIMES expr .)
+    TIMES           reduce using rule 13 (expr -> expr TIMES expr .)
+    MINUS           reduce using rule 13 (expr -> expr TIMES expr .)
+    PLUS            reduce using rule 13 (expr -> expr TIMES expr .)
+    GT              reduce using rule 13 (expr -> expr TIMES expr .)
+    GE              reduce using rule 13 (expr -> expr TIMES expr .)
+    LT              reduce using rule 13 (expr -> expr TIMES expr .)
+    LE              reduce using rule 13 (expr -> expr TIMES expr .)
+    NE              reduce using rule 13 (expr -> expr TIMES expr .)
+    EQ              reduce using rule 13 (expr -> expr TIMES expr .)
+    AND             reduce using rule 13 (expr -> expr TIMES expr .)
+    OR              reduce using rule 13 (expr -> expr TIMES expr .)
+    RPAREN          reduce using rule 13 (expr -> expr TIMES expr .)
+    COMMA           reduce using rule 13 (expr -> expr TIMES expr .)
+    SRBRAK          reduce using rule 13 (expr -> expr TIMES expr .)
+
+
+state 94
+
+    (14) expr -> expr MINUS expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 14 (expr -> expr MINUS expr .)
+    MINUS           reduce using rule 14 (expr -> expr MINUS expr .)
+    PLUS            reduce using rule 14 (expr -> expr MINUS expr .)
+    GT              reduce using rule 14 (expr -> expr MINUS expr .)
+    GE              reduce using rule 14 (expr -> expr MINUS expr .)
+    LT              reduce using rule 14 (expr -> expr MINUS expr .)
+    LE              reduce using rule 14 (expr -> expr MINUS expr .)
+    NE              reduce using rule 14 (expr -> expr MINUS expr .)
+    EQ              reduce using rule 14 (expr -> expr MINUS expr .)
+    AND             reduce using rule 14 (expr -> expr MINUS expr .)
+    OR              reduce using rule 14 (expr -> expr MINUS expr .)
+    RPAREN          reduce using rule 14 (expr -> expr MINUS expr .)
+    COMMA           reduce using rule 14 (expr -> expr MINUS expr .)
+    SRBRAK          reduce using rule 14 (expr -> expr MINUS expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+
+
+state 95
+
+    (15) expr -> expr PLUS expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 15 (expr -> expr PLUS expr .)
+    MINUS           reduce using rule 15 (expr -> expr PLUS expr .)
+    PLUS            reduce using rule 15 (expr -> expr PLUS expr .)
+    GT              reduce using rule 15 (expr -> expr PLUS expr .)
+    GE              reduce using rule 15 (expr -> expr PLUS expr .)
+    LT              reduce using rule 15 (expr -> expr PLUS expr .)
+    LE              reduce using rule 15 (expr -> expr PLUS expr .)
+    NE              reduce using rule 15 (expr -> expr PLUS expr .)
+    EQ              reduce using rule 15 (expr -> expr PLUS expr .)
+    AND             reduce using rule 15 (expr -> expr PLUS expr .)
+    OR              reduce using rule 15 (expr -> expr PLUS expr .)
+    RPAREN          reduce using rule 15 (expr -> expr PLUS expr .)
+    COMMA           reduce using rule 15 (expr -> expr PLUS expr .)
+    SRBRAK          reduce using rule 15 (expr -> expr PLUS expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+
+
+state 96
+
+    (16) expr -> expr GT expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 16 (expr -> expr GT expr .)
+    GT              reduce using rule 16 (expr -> expr GT expr .)
+    GE              reduce using rule 16 (expr -> expr GT expr .)
+    LT              reduce using rule 16 (expr -> expr GT expr .)
+    LE              reduce using rule 16 (expr -> expr GT expr .)
+    NE              reduce using rule 16 (expr -> expr GT expr .)
+    EQ              reduce using rule 16 (expr -> expr GT expr .)
+    AND             reduce using rule 16 (expr -> expr GT expr .)
+    OR              reduce using rule 16 (expr -> expr GT expr .)
+    RPAREN          reduce using rule 16 (expr -> expr GT expr .)
+    COMMA           reduce using rule 16 (expr -> expr GT expr .)
+    SRBRAK          reduce using rule 16 (expr -> expr GT expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+
+
+state 97
+
+    (17) expr -> expr GE expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 17 (expr -> expr GE expr .)
+    GT              reduce using rule 17 (expr -> expr GE expr .)
+    GE              reduce using rule 17 (expr -> expr GE expr .)
+    LT              reduce using rule 17 (expr -> expr GE expr .)
+    LE              reduce using rule 17 (expr -> expr GE expr .)
+    NE              reduce using rule 17 (expr -> expr GE expr .)
+    EQ              reduce using rule 17 (expr -> expr GE expr .)
+    AND             reduce using rule 17 (expr -> expr GE expr .)
+    OR              reduce using rule 17 (expr -> expr GE expr .)
+    RPAREN          reduce using rule 17 (expr -> expr GE expr .)
+    COMMA           reduce using rule 17 (expr -> expr GE expr .)
+    SRBRAK          reduce using rule 17 (expr -> expr GE expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+
+
+state 98
+
+    (18) expr -> expr LT expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 18 (expr -> expr LT expr .)
+    GT              reduce using rule 18 (expr -> expr LT expr .)
+    GE              reduce using rule 18 (expr -> expr LT expr .)
+    LT              reduce using rule 18 (expr -> expr LT expr .)
+    LE              reduce using rule 18 (expr -> expr LT expr .)
+    NE              reduce using rule 18 (expr -> expr LT expr .)
+    EQ              reduce using rule 18 (expr -> expr LT expr .)
+    AND             reduce using rule 18 (expr -> expr LT expr .)
+    OR              reduce using rule 18 (expr -> expr LT expr .)
+    RPAREN          reduce using rule 18 (expr -> expr LT expr .)
+    COMMA           reduce using rule 18 (expr -> expr LT expr .)
+    SRBRAK          reduce using rule 18 (expr -> expr LT expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+
+
+state 99
+
+    (19) expr -> expr LE expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 19 (expr -> expr LE expr .)
+    GT              reduce using rule 19 (expr -> expr LE expr .)
+    GE              reduce using rule 19 (expr -> expr LE expr .)
+    LT              reduce using rule 19 (expr -> expr LE expr .)
+    LE              reduce using rule 19 (expr -> expr LE expr .)
+    NE              reduce using rule 19 (expr -> expr LE expr .)
+    EQ              reduce using rule 19 (expr -> expr LE expr .)
+    AND             reduce using rule 19 (expr -> expr LE expr .)
+    OR              reduce using rule 19 (expr -> expr LE expr .)
+    RPAREN          reduce using rule 19 (expr -> expr LE expr .)
+    COMMA           reduce using rule 19 (expr -> expr LE expr .)
+    SRBRAK          reduce using rule 19 (expr -> expr LE expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+
+
+state 100
+
+    (20) expr -> expr NE expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 20 (expr -> expr NE expr .)
+    NE              reduce using rule 20 (expr -> expr NE expr .)
+    EQ              reduce using rule 20 (expr -> expr NE expr .)
+    AND             reduce using rule 20 (expr -> expr NE expr .)
+    OR              reduce using rule 20 (expr -> expr NE expr .)
+    RPAREN          reduce using rule 20 (expr -> expr NE expr .)
+    COMMA           reduce using rule 20 (expr -> expr NE expr .)
+    SRBRAK          reduce using rule 20 (expr -> expr NE expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+
+
+state 101
+
+    (21) expr -> expr EQ expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 21 (expr -> expr EQ expr .)
+    NE              reduce using rule 21 (expr -> expr EQ expr .)
+    EQ              reduce using rule 21 (expr -> expr EQ expr .)
+    AND             reduce using rule 21 (expr -> expr EQ expr .)
+    OR              reduce using rule 21 (expr -> expr EQ expr .)
+    RPAREN          reduce using rule 21 (expr -> expr EQ expr .)
+    COMMA           reduce using rule 21 (expr -> expr EQ expr .)
+    SRBRAK          reduce using rule 21 (expr -> expr EQ expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+
+
+state 102
+
+    (22) expr -> expr AND expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 22 (expr -> expr AND expr .)
+    AND             reduce using rule 22 (expr -> expr AND expr .)
+    OR              reduce using rule 22 (expr -> expr AND expr .)
+    RPAREN          reduce using rule 22 (expr -> expr AND expr .)
+    COMMA           reduce using rule 22 (expr -> expr AND expr .)
+    SRBRAK          reduce using rule 22 (expr -> expr AND expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+
+
+state 103
+
+    (23) expr -> expr OR expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 23 (expr -> expr OR expr .)
+    OR              reduce using rule 23 (expr -> expr OR expr .)
+    RPAREN          reduce using rule 23 (expr -> expr OR expr .)
+    COMMA           reduce using rule 23 (expr -> expr OR expr .)
+    SRBRAK          reduce using rule 23 (expr -> expr OR expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+
+
+state 104
+
+    (61) while_stmt -> WHILE LPAREN expr . RPAREN stmt
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    RPAREN          shift and go to state 116
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 105
+
+    (10) expr -> LPAREN expr RPAREN .
+    SEMI            reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    MOD             reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    DIVIDE          reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    TIMES           reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    MINUS           reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    PLUS            reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    GT              reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    GE              reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    LT              reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    LE              reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    NE              reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    EQ              reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    AND             reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    OR              reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    COMMA           reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+    SRBRAK          reduce using rule 10 (expr -> LPAREN expr RPAREN .)
+
+
+state 106
+
+    (62) if_stmt -> IF LPAREN expr . RPAREN stmt ELSE stmt
+    (63) if_stmt -> IF LPAREN expr . RPAREN stmt
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    RPAREN          shift and go to state 117
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 107
+
+    (2) expr -> NEW type_spec SLBRAK . expr SRBRAK
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 118
+
+state 108
+
+    (6) expr -> IDENT POINT SIZE .
+    SEMI            reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    MOD             reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    DIVIDE          reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    TIMES           reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    MINUS           reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    PLUS            reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    GT              reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    GE              reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    LT              reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    LE              reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    NE              reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    EQ              reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    AND             reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    OR              reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    RPAREN          reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    COMMA           reduce using rule 6 (expr -> IDENT POINT SIZE .)
+    SRBRAK          reduce using rule 6 (expr -> IDENT POINT SIZE .)
+
+
+state 109
+
+    (7) expr -> IDENT LPAREN args . RPAREN
+    RPAREN          shift and go to state 119
+
+
+state 110
+
+    (69) args -> empty .
+    RPAREN          reduce using rule 69 (args -> empty .)
+
+
+state 111
+
+    (70) args -> arg_list .
+    (68) arg_list -> arg_list . COMMA expr
+    RPAREN          reduce using rule 70 (args -> arg_list .)
+    COMMA           shift and go to state 120
+
+
+state 112
+
+    (67) arg_list -> expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    COMMA           reduce using rule 67 (arg_list -> expr .)
+    RPAREN          reduce using rule 67 (arg_list -> expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 113
+
+    (8) expr -> IDENT SLBRAK expr . SRBRAK
+    (24) expr -> IDENT SLBRAK expr . SRBRAK ASSIGN expr
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SRBRAK          shift and go to state 121
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 114
+
+    (25) expr -> IDENT ASSIGN expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 25 (expr -> IDENT ASSIGN expr .)
+    RPAREN          reduce using rule 25 (expr -> IDENT ASSIGN expr .)
+    COMMA           reduce using rule 25 (expr -> IDENT ASSIGN expr .)
+    SRBRAK          reduce using rule 25 (expr -> IDENT ASSIGN expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 115
+
+    (49) local_decl -> type_spec IDENT SLBRAK SRBRAK . SEMI
+    SEMI            shift and go to state 122
+
+
+state 116
+
+    (61) while_stmt -> WHILE LPAREN expr RPAREN . stmt
+    (53) stmt -> . break_stmt
+    (54) stmt -> . return_stmt
+    (55) stmt -> . while_stmt
+    (56) stmt -> . if_stmt
+    (57) stmt -> . compound_stmt
+    (58) stmt -> . expr_stmt
+    (66) break_stmt -> . BREAK SEMI
+    (64) return_stmt -> . RETURN expr SEMI
+    (65) return_stmt -> . RETURN SEMI
+    (61) while_stmt -> . WHILE LPAREN expr RPAREN stmt
+    (62) if_stmt -> . IF LPAREN expr RPAREN stmt ELSE stmt
+    (63) if_stmt -> . IF LPAREN expr RPAREN stmt
+    (46) compound_stmt -> . LBRAK local_decls stmt_list RBRAK
+    (59) expr_stmt -> . SEMI
+    (60) expr_stmt -> . expr SEMI
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    BREAK           shift and go to state 44
+    RETURN          shift and go to state 46
+    WHILE           shift and go to state 48
+    IF              shift and go to state 50
+    LBRAK           shift and go to state 27
+    SEMI            shift and go to state 45
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 47
+    stmt                           shift and go to state 123
+    break_stmt                     shift and go to state 38
+    return_stmt                    shift and go to state 39
+    while_stmt                     shift and go to state 40
+    if_stmt                        shift and go to state 41
+    compound_stmt                  shift and go to state 42
+    expr_stmt                      shift and go to state 43
+
+state 117
+
+    (62) if_stmt -> IF LPAREN expr RPAREN . stmt ELSE stmt
+    (63) if_stmt -> IF LPAREN expr RPAREN . stmt
+    (53) stmt -> . break_stmt
+    (54) stmt -> . return_stmt
+    (55) stmt -> . while_stmt
+    (56) stmt -> . if_stmt
+    (57) stmt -> . compound_stmt
+    (58) stmt -> . expr_stmt
+    (66) break_stmt -> . BREAK SEMI
+    (64) return_stmt -> . RETURN expr SEMI
+    (65) return_stmt -> . RETURN SEMI
+    (61) while_stmt -> . WHILE LPAREN expr RPAREN stmt
+    (62) if_stmt -> . IF LPAREN expr RPAREN stmt ELSE stmt
+    (63) if_stmt -> . IF LPAREN expr RPAREN stmt
+    (46) compound_stmt -> . LBRAK local_decls stmt_list RBRAK
+    (59) expr_stmt -> . SEMI
+    (60) expr_stmt -> . expr SEMI
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    BREAK           shift and go to state 44
+    RETURN          shift and go to state 46
+    WHILE           shift and go to state 48
+    IF              shift and go to state 50
+    LBRAK           shift and go to state 27
+    SEMI            shift and go to state 45
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 47
+    stmt                           shift and go to state 124
+    break_stmt                     shift and go to state 38
+    return_stmt                    shift and go to state 39
+    while_stmt                     shift and go to state 40
+    if_stmt                        shift and go to state 41
+    compound_stmt                  shift and go to state 42
+    expr_stmt                      shift and go to state 43
+
+state 118
+
+    (2) expr -> NEW type_spec SLBRAK expr . SRBRAK
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SRBRAK          shift and go to state 125
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 119
+
+    (7) expr -> IDENT LPAREN args RPAREN .
+    SEMI            reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    MOD             reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    DIVIDE          reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    TIMES           reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    MINUS           reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    PLUS            reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    GT              reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    GE              reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    LT              reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    LE              reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    NE              reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    EQ              reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    AND             reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    OR              reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    RPAREN          reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    COMMA           reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+    SRBRAK          reduce using rule 7 (expr -> IDENT LPAREN args RPAREN .)
+
+
+state 120
+
+    (68) arg_list -> arg_list COMMA . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 126
+
+state 121
+
+    (8) expr -> IDENT SLBRAK expr SRBRAK .
+    (24) expr -> IDENT SLBRAK expr SRBRAK . ASSIGN expr
+    SEMI            reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    MOD             reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    DIVIDE          reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    TIMES           reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    MINUS           reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    PLUS            reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    GT              reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    GE              reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    LT              reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    LE              reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    NE              reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    EQ              reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    AND             reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    OR              reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    RPAREN          reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    COMMA           reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    SRBRAK          reduce using rule 8 (expr -> IDENT SLBRAK expr SRBRAK .)
+    ASSIGN          shift and go to state 127
+
+
+state 122
+
+    (49) local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .
+    FLOAT           reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    INT             reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    BOOL            reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    VOID            reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    RBRAK           reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    BREAK           reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    RETURN          reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    WHILE           reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    IF              reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    LBRAK           reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    SEMI            reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    NEW             reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    FLOAT_LIT       reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    INT_LIT         reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    BOOL_LIT        reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    IDENT           reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    LPAREN          reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    PLUS            reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    MINUS           reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+    NEG             reduce using rule 49 (local_decl -> type_spec IDENT SLBRAK SRBRAK SEMI .)
+
+
+state 123
+
+    (61) while_stmt -> WHILE LPAREN expr RPAREN stmt .
+    RBRAK           reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    BREAK           reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    RETURN          reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    WHILE           reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    IF              reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    LBRAK           reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    SEMI            reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    NEW             reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    FLOAT_LIT       reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    INT_LIT         reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    BOOL_LIT        reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    IDENT           reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    LPAREN          reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    PLUS            reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    MINUS           reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    NEG             reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+    ELSE            reduce using rule 61 (while_stmt -> WHILE LPAREN expr RPAREN stmt .)
+
+
+state 124
+
+    (62) if_stmt -> IF LPAREN expr RPAREN stmt . ELSE stmt
+    (63) if_stmt -> IF LPAREN expr RPAREN stmt .
+  ! shift/reduce conflict for ELSE resolved as shift
+    ELSE            shift and go to state 128
+    RBRAK           reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    BREAK           reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    RETURN          reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    WHILE           reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    IF              reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    LBRAK           reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    SEMI            reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    NEW             reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    FLOAT_LIT       reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    INT_LIT         reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    BOOL_LIT        reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    IDENT           reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    LPAREN          reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    PLUS            reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    MINUS           reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+    NEG             reduce using rule 63 (if_stmt -> IF LPAREN expr RPAREN stmt .)
+
+
+state 125
+
+    (2) expr -> NEW type_spec SLBRAK expr SRBRAK .
+    SEMI            reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    MOD             reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    DIVIDE          reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    TIMES           reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    MINUS           reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    PLUS            reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    GT              reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    GE              reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    LT              reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    LE              reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    NE              reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    EQ              reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    AND             reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    OR              reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    RPAREN          reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    COMMA           reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+    SRBRAK          reduce using rule 2 (expr -> NEW type_spec SLBRAK expr SRBRAK .)
+
+
+state 126
+
+    (68) arg_list -> arg_list COMMA expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    COMMA           reduce using rule 68 (arg_list -> arg_list COMMA expr .)
+    RPAREN          reduce using rule 68 (arg_list -> arg_list COMMA expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 127
+
+    (24) expr -> IDENT SLBRAK expr SRBRAK ASSIGN . expr
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 129
+
+state 128
+
+    (62) if_stmt -> IF LPAREN expr RPAREN stmt ELSE . stmt
+    (53) stmt -> . break_stmt
+    (54) stmt -> . return_stmt
+    (55) stmt -> . while_stmt
+    (56) stmt -> . if_stmt
+    (57) stmt -> . compound_stmt
+    (58) stmt -> . expr_stmt
+    (66) break_stmt -> . BREAK SEMI
+    (64) return_stmt -> . RETURN expr SEMI
+    (65) return_stmt -> . RETURN SEMI
+    (61) while_stmt -> . WHILE LPAREN expr RPAREN stmt
+    (62) if_stmt -> . IF LPAREN expr RPAREN stmt ELSE stmt
+    (63) if_stmt -> . IF LPAREN expr RPAREN stmt
+    (46) compound_stmt -> . LBRAK local_decls stmt_list RBRAK
+    (59) expr_stmt -> . SEMI
+    (60) expr_stmt -> . expr SEMI
+    (2) expr -> . NEW type_spec SLBRAK expr SRBRAK
+    (3) expr -> . FLOAT_LIT
+    (4) expr -> . INT_LIT
+    (5) expr -> . BOOL_LIT
+    (6) expr -> . IDENT POINT SIZE
+    (7) expr -> . IDENT LPAREN args RPAREN
+    (8) expr -> . IDENT SLBRAK expr SRBRAK
+    (9) expr -> . IDENT
+    (10) expr -> . LPAREN expr RPAREN
+    (11) expr -> . expr MOD expr
+    (12) expr -> . expr DIVIDE expr
+    (13) expr -> . expr TIMES expr
+    (14) expr -> . expr MINUS expr
+    (15) expr -> . expr PLUS expr
+    (16) expr -> . expr GT expr
+    (17) expr -> . expr GE expr
+    (18) expr -> . expr LT expr
+    (19) expr -> . expr LE expr
+    (20) expr -> . expr NE expr
+    (21) expr -> . expr EQ expr
+    (22) expr -> . expr AND expr
+    (23) expr -> . expr OR expr
+    (24) expr -> . IDENT SLBRAK expr SRBRAK ASSIGN expr
+    (25) expr -> . IDENT ASSIGN expr
+    (26) expr -> . PLUS expr
+    (27) expr -> . MINUS expr
+    (28) expr -> . NEG expr
+    BREAK           shift and go to state 44
+    RETURN          shift and go to state 46
+    WHILE           shift and go to state 48
+    IF              shift and go to state 50
+    LBRAK           shift and go to state 27
+    SEMI            shift and go to state 45
+    NEW             shift and go to state 51
+    FLOAT_LIT       shift and go to state 52
+    INT_LIT         shift and go to state 53
+    BOOL_LIT        shift and go to state 54
+    IDENT           shift and go to state 55
+    LPAREN          shift and go to state 49
+    PLUS            shift and go to state 57
+    MINUS           shift and go to state 56
+    NEG             shift and go to state 58
+
+    expr                           shift and go to state 47
+    stmt                           shift and go to state 130
+    break_stmt                     shift and go to state 38
+    return_stmt                    shift and go to state 39
+    while_stmt                     shift and go to state 40
+    if_stmt                        shift and go to state 41
+    compound_stmt                  shift and go to state 42
+    expr_stmt                      shift and go to state 43
+
+state 129
+
+    (24) expr -> IDENT SLBRAK expr SRBRAK ASSIGN expr .
+    (11) expr -> expr . MOD expr
+    (12) expr -> expr . DIVIDE expr
+    (13) expr -> expr . TIMES expr
+    (14) expr -> expr . MINUS expr
+    (15) expr -> expr . PLUS expr
+    (16) expr -> expr . GT expr
+    (17) expr -> expr . GE expr
+    (18) expr -> expr . LT expr
+    (19) expr -> expr . LE expr
+    (20) expr -> expr . NE expr
+    (21) expr -> expr . EQ expr
+    (22) expr -> expr . AND expr
+    (23) expr -> expr . OR expr
+    SEMI            reduce using rule 24 (expr -> IDENT SLBRAK expr SRBRAK ASSIGN expr .)
+    RPAREN          reduce using rule 24 (expr -> IDENT SLBRAK expr SRBRAK ASSIGN expr .)
+    COMMA           reduce using rule 24 (expr -> IDENT SLBRAK expr SRBRAK ASSIGN expr .)
+    SRBRAK          reduce using rule 24 (expr -> IDENT SLBRAK expr SRBRAK ASSIGN expr .)
+    MOD             shift and go to state 64
+    DIVIDE          shift and go to state 65
+    TIMES           shift and go to state 66
+    MINUS           shift and go to state 67
+    PLUS            shift and go to state 68
+    GT              shift and go to state 69
+    GE              shift and go to state 70
+    LT              shift and go to state 71
+    LE              shift and go to state 72
+    NE              shift and go to state 73
+    EQ              shift and go to state 74
+    AND             shift and go to state 75
+    OR              shift and go to state 76
+
+
+state 130
+
+    (62) if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .
+    RBRAK           reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    BREAK           reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    RETURN          reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    WHILE           reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    IF              reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    LBRAK           reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    SEMI            reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    NEW             reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    FLOAT_LIT       reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    INT_LIT         reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    BOOL_LIT        reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    IDENT           reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    LPAREN          reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    PLUS            reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    MINUS           reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    NEG             reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+    ELSE            reduce using rule 62 (if_stmt -> IF LPAREN expr RPAREN stmt ELSE stmt .)
+
+
+Conflicts:
+
+shift/reduce conflict for ELSE in state 124 resolved as shift

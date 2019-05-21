@@ -1,0 +1,151 @@
+---------------------------------------------------------------------------------------
+------------------------------INFORMACIÓN GENERAL-------------------------------------
+---------------------------------------------------------------------------------------
+      Profesor:
+                Angel Augusto Agudelo
+      Materia:
+                Compiladores
+      Integrantes:
+                Juan Camilo Sosa
+                Esteban Castaño
+                Juan Diego Castaño
+
+      Fecha de entrega:
+                Viernes, 12 de abril de 2019
+
+      Numero de etapa: 1
+
+      Funcionalidad desarrollada:
+                Lexer
+
+---------------------------------------------------------------------------------------
+-------------------------------------PROBLEMAS-----------------------------------------
+---------------------------------------------------------------------------------------
+      Problemas que se han tenido en la construccion del Lexer:
+
+      Con comentarios legales:
+                1. Al pasarle dos argumentos a la funcion decorador--->
+                  @_(r'...', r'...')
+                  def ignore_comment(t)
+                    ...
+                  Daba el error: takes 1 positional argument but 2 were given.
+                Esto se corrigió cambiando la definicion del def del decorador asi--->
+                  def ignore_comment(self,t):
+                Lo cual de alguna manera volvia el decorador "recursivo", o que podia ser
+                llamado con 2 o + argumentos
+
+
+
+      Con los comentarios ilegales.
+
+                1. Cuando ignora el comentario no agrega valor a lineno para saber que numero
+                de linea se esta compilando
+                El problema no ocurre cuando hay un comentario multiple dentro de la misma
+                linea, asi--->
+                /*Comentario...*/
+
+                Sino cuando hay un comentario asi--->
+                /*
+                Comentarios*/
+
+                A pesar de esto, cumple con su tarea de ignore y no afecta la funcionalidad del
+                programa, lo unico es que no suma el numero de newlines(\n) que hay en este para
+                sumarlas a lineno (Numero de linea).
+                La declaracion del decorador es la siguiente--->
+
+                    @_(r'/\*[\w\W]*?\*/',r'//.*')
+                        def ignore_comment(self,t):
+                                t.lineno += t.value.count('\n')
+                Lo que se esperaba, es que a t.lineno se le sumara el numero de '\n' con el metodo
+                .count. Pero este por alguna razón no lo contabiliza (o si lo hace no lo suma al
+                valor de lineno)
+                No se logró determinar la causa del bug. Pedimos disculpas.
+
+
+          Comentarios anidados
+
+                El mayor reto para este ejercicio fue el manejo de identificar errores en los
+                comentarios anidados. Para esto se llego a la siguiente expresion regular--->
+
+                    (/\*).*\n*(/\*)+.*   (VER:  minic/README/Error_comentarios_anidados_1.png)
+
+                Esta expresion selecciona cualquier comentario que luego de /* tenga otro /*
+                con cualquier cosa en el medio, y luego cualquier cosa(es decir lo que siga
+                en la linea tambien se selecciona). Esta expresion no toma los comentarios
+                legales, como se puede probar ejecutando la prueba /test/testComentarios.(
+                ver instrucciones de ejecucion en el programa app/entrega1_lexer justo antes
+                del main.)
+
+                De manera similar, se hizo una expresion regular para detectar cuando hay */
+                con cualquier cosa en el medio, y luego */, y luego cualquier cosa
+
+                    (\*/).*\n*(\*/)+.*   (VER: minic/README/Error_comentarios_anidados_2.png)
+
+                Estos casos se pueden ver mas claramente en las imagenes adjuntas.
+
+                EXCEPCION:
+                    El unico caso que no contempla es el siguiente--->
+
+                          /*///Algun comentario */
+                    En el cual no esta muy claro si el comentario es legal o ilegal, debido a que
+                    luego de /* hay un / (/*/), entonces la expresion regular lo interpreta como
+                    un */ y luego interpreta que hubo otro */, y por esto lo considera ilegal.
+
+                RESULTADO:
+                @_(r'(\*/).*\n*(\*/)+.*',r'(/\*).*\n*(/\*)+.*')
+                    def error_comentario(self, t):
+                            error(self.lineno, 'ERROR: Comentarios anidados no permitidos')
+                            self.index += 1
+
+      Con los numeros:
+              El reto para los numeros fueron los FLOAT, ya que podian presentarse en diferentes
+              bases. Con estos no se tuvo problemas, lo único fue que para reconocer los de base
+              octal cuando se presentaban asi:
+                      21a3b24h(hexadecimal)
+                      0100101b (binario)
+                      172726o y 01234 (octal)
+              Pero si se hizo cuando se presentaban de las otras maneras estipuladas en las
+              instrucciones.
+---------------------------------------------------------------------------------------
+--------------------------------ESTRUCTURA GENERAL-------------------------------------
+---------------------------------------------------------------------------------------
+
+      Estructura general de la carpeta----->
+      ->minic
+            ->.venv
+
+            ->app
+                ->entrega1_lexer.py (EJECUTABLE)
+                ->errors.py (Manejo de errores)
+
+            ->README
+                ->Entrega1_Lexer (Documentacion para la construccino del Lexer)
+
+            ->requeriments
+                ->req_lexer (Librerias y programas requeridos)
+
+            ->test
+                ->prueba.c (test general del Lexer)
+                ->testComentarios (test para los comentarios)
+                ->testNumeros (test para los numeros)
+
+---------------------------------------------------------------------------------------
+-------------------------------------EJECUCION-----------------------------------------
+---------------------------------------------------------------------------------------
+
+    Para correr el Lexer--->
+
+           Una vez posicionado en la carpeta ~/RUTA_RELATIVA/minic/app
+                ...$:   python3 -m entrega1_lexer ../test/prueba.c
+           Para correr peuba de comentarios:
+                ...$:   python3 -m entrega1_lexer ../test/testComentarios
+           Para correr peuba de numeros:
+                ...$:   python3 -m entrega1_lexer ../test/testNumeros
+
+---------------------------------------------------------------------------------------
+--------------------------------------ESCALABILIDAD------------------------------------
+---------------------------------------------------------------------------------------
+
+    Para futuro mantenimiento, se deben implementar:
+        -Mejorar testing de errores (pruebas unitarias)
+        -Manejo de excepciones especiales para numeros de diferentes bases.

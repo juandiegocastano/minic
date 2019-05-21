@@ -1,0 +1,33 @@
+#Comentarios legales
+1. /**/
+2. /*Comentario * / //  legal**/
+3. /*
+  *espacio/  */
+4. /**/
+5. /* Hola */
+6. /*   */
+
+7. /* _$ + [] //    */a
+8. //HolaHola
+9. // // Legal
+
+#Comentarios anidados ilegales
+1. */*/
+2. /* /**/ */
+3. /* /* /* */ */ */
+4. /* /* /* */
+5. f /*/**/
+6. /*/* */
+7.
+/*
+/*
+*/
+*/
+8.
+/* ahaha
+/*
+*/
+*/
+#¿Legal o ilegal?
+/*/// */
+/*  //*/

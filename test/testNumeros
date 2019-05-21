@@ -1,0 +1,35 @@
+
+Pruebas de numeros---->
+    123
+    123.4
+    123d
+    324
+    a1.2a3
+    123.
+    .123
+
+Exponenciales---->
+    1.23e1
+    1.23e+1
+    1.23e-1
+    1.23e-1
+    1.e10
+    1.e-101
+    1.e-101a
+    1e1
+    1e-1
+
+Octales-->
+    0o1234567
+    0o
+    0oa #ILEGAL
+    0o8 #ILEGAL
+Hexadecimales--->
+    0x123456789abcdef
+    0xffff12343f12
+    0xffff12343f12szf
+Binario---->
+    0b00101010101
+    0b012
+    0a0101
+    0b1
